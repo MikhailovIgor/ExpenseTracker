@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Platform} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-MaterialCommunityIcons.loadFont();
+Icon.loadFont();
 
 const CustomHeader = ({title, navigation}) => {
   return (
@@ -14,7 +14,7 @@ const CustomHeader = ({title, navigation}) => {
           justifyContent: 'center',
         }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <MaterialCommunityIcons name="menu" color="#1ACAD7" size={40} />
+          <Icon name="menu" color="#1ACAD7" size={40} />
         </TouchableOpacity>
       </View>
       <View

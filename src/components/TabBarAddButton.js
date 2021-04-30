@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text, SafeAreaView} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
 import TabBg from '../assets/svg/TabBg';
@@ -14,8 +14,10 @@ const TabBarAddButton = ({bgColor, ...props}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Add')}>
-        <MaterialCommunityIcons name="plus" style={styles.buttonIcon} />
-        {/* <Text style={{color: '#fff', fontSize: 30}}>+</Text> */}
+        {/* <MaterialCommunityIcons name="plus" style={styles.buttonIcon} /> */}
+        <Text style={{color: '#f6f7eb', fontSize: 30, paddingBottom: 4}}>
+          +
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
