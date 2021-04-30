@@ -24,7 +24,89 @@ const AuthScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Sign Up</Text>
-      <Formik initialValues={initialValues} validationSchema={}></Formik>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={}>
+        {({
+          handleSubmit,
+          handleBlur,
+          resetForm,
+          handleChange,
+          values,
+          touched,
+          errors,
+        }) => (
+          <>
+            <Input
+              placeholder="Name"
+              placeholderTextColor={'#1ACAD7'}
+              leftIcon={{
+                type: 'material-community',
+                name: 'account',
+                color: '#1ACAD7',
+              }}
+              inputStyle={styles.inputStyle}
+              inputContainerStyle={styles.inputContainerStyle}
+              renderErrorMessage={errors.email && touched.email}
+              errorMessage={errors.email}
+              errorStyle={{color: 'red'}}
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
+            />
+            <Input
+              placeholder="Email"
+              placeholderTextColor={'#1ACAD7'}
+              leftIcon={{
+                type: 'material-community',
+                name: 'email',
+                color: '#1ACAD7',
+              }}
+              inputStyle={styles.inputStyle}
+              inputContainerStyle={styles.inputContainerStyle}
+              // renderErrorMessage={errors.email && touched.email}
+              // errorMessage={errors.email}
+              errorStyle={{color: 'red'}}
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+            />
+            <Input
+              placeholder="password"
+              secureTextEntry={secureEntry}
+              placeholderTextColor={'#1ACAD7'}
+              leftIcon={{
+                type: 'material-community',
+                name: 'lock',
+                color: '#1ACAD7',
+              }}
+              inputStyle={styles.inputStyle}
+              inputContainerStyle={styles.inputContainerStyle}
+              rightIcon={{
+                type: 'antdesign',
+                name: secureEntry ? 'eye' : 'eyeo',
+                color: '#1ACAD7',
+                onPress: () => setSecureEntry(!secureEntry),
+              }}
+              // renderErrorMessage={errors.password && touched.password}
+              // errorMessage={errors.password}
+              // errorStyle={{color: Colors.black}}
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+            />
+            <Button
+              title={formType ? 'Register' : 'Log in'}
+              type="solid"
+              onPress={handleSubmit}
+              loading={loading}
+              titleStyle={styles.buttonTitleStyle}
+              buttonStyle={styles.buttonStyle}
+            />
+          </>
+        )}
+      </Formik>
     </View>
   );
 };
