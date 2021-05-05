@@ -5,7 +5,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {signIn} from '../redux/actions/authActions';
+import {logIn, signUp} from '../redux/actions/authActions';
 
 const AuthScreen = () => {
   const [secureEntry, setSecureEntry] = useState(true);
@@ -32,13 +32,13 @@ const AuthScreen = () => {
 
   const handleSubmit = (values, {resetForm}) => {
     console.log(values);
-    setLoading(true);
+    // setLoading(true);
     if (formType) {
-      dispatch(signIn(values));
+      dispatch(signUp(values));
       resetForm(initialValues);
-      setLoading(false);
+      // setLoading(false);
     } else {
-      // ???
+      dispatch(logIn(values));
     }
   };
 
@@ -121,7 +121,7 @@ const AuthScreen = () => {
               title={formType ? 'Sign In' : 'Log in'}
               type="solid"
               onPress={handleSubmit}
-              loading={loading}
+              // loading={loading}
               titleStyle={styles.buttonTitleStyle}
               buttonStyle={styles.buttonStyle}
               containerStyle={{width: '87%'}}

@@ -1,9 +1,9 @@
 import {SIGN_IN, LOG_IN, LOG_OUT} from '../types';
 import * as api from '../api';
 
-export const signIn = values => ({
+export const signUp = values => ({
   type: SIGN_IN,
-  payload: api.signIn(values),
+  payload: api.signUp(values),
 });
 
 export const logIn = values => ({
