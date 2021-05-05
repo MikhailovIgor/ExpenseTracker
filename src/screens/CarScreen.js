@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, ImageBackground, StyleSheet} from 'react-native';
 
 import CustomHeader from '../components/CustomHeader';
-import CustomButton from '../components/customButton';
+import CustomButton from '../components/CustomButton';
 
 const image = require('../assets/images/mainBackground.jpeg');
 
