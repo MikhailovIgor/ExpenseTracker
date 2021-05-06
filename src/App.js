@@ -11,14 +11,14 @@ import {useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 
 import DrawerNavigator from './navigation/DrawerNavigator';
-import AuthScreen from './screens/AuthScreen';
+import AuthStack from './navigation/AuthStack';
 
 const App = () => {
   const auth = useSelector(state => state.auth.isAuth);
 
   return (
     <NavigationContainer>
-      {auth ? <DrawerNavigator /> : <AuthScreen />}
+      {auth ? <DrawerNavigator /> : <AuthStack />}
     </NavigationContainer>
   );
 };

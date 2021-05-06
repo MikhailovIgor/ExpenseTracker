@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, KeyboardAvoidingView} from 'react-native';
+import {View, StyleSheet, Text, KeyboardAvoidingView} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {logIn, signUp} from '../redux/actions/authActions';
-import {NavigationContainer} from '@react-navigation/native';
+import {signIn} from '../redux/actions/authActions';
 
-const AuthScreen = ({navigation}) => {
+const LoginScreen = ({navigation}) => {
   const [secureEntry, setSecureEntry] = useState(true);
   const [formType, setFormType] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -19,12 +18,8 @@ const AuthScreen = ({navigation}) => {
   const initialValues = {name: '', email: '', password: ''};
 
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .min(2, 'at least 2 symbols')
-      .max(20, 'must be 20 or less')
-      .required('The name is required'),
     email: Yup.string()
-      .email('invalid email address')
+      .email('Invalid email address')
       .required('The email is required'),
     password: Yup.string()
       .max(20, 'must be 20 or less')
@@ -32,20 +27,19 @@ const AuthScreen = ({navigation}) => {
   });
 
   const handleSubmit = (values, {resetForm}) => {
-    console.log(values);
-    // setLoading(true);
+    setLoading(true);
     if (formType) {
-      dispatch(signUp(values));
+      dispatch(signIn(values));
       resetForm(initialValues);
-      // setLoading(false);
+      setLoading(false);
     } else {
-      dispatch(logIn(values));
+      //sign In
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Sign Up</Text>
+      <Text style={styles.headerText}>Log In</Text>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -62,23 +56,6 @@ const AuthScreen = ({navigation}) => {
           <KeyboardAvoidingView
             behavior="height"
             style={{flex: 0.7, justifyContent: 'center'}}>
-            <Input
-              placeholder="Name"
-              placeholderTextColor={'#1ACAD7'}
-              leftIcon={{
-                type: 'material-community',
-                name: 'account',
-                color: '#1ACAD7',
-              }}
-              inputStyle={styles.inputStyle}
-              inputContainerStyle={styles.inputContainerStyle}
-              renderErrorMessage={errors.email && touched.email}
-              errorMessage={errors.name}
-              errorStyle={{color: 'tomato'}}
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
-            />
             <Input
               placeholder="Email"
               placeholderTextColor={'#1ACAD7'}
@@ -121,26 +98,26 @@ const AuthScreen = ({navigation}) => {
               value={values.password}
             />
             <Button
-              title="Register"
+              title={'Log in'}
               type="solid"
               onPress={handleSubmit}
-              // loading={loading}
+              loading={loading}
               titleStyle={styles.buttonTitleStyle}
               buttonStyle={styles.buttonStyle}
-              containerStyle={{width: '87%'}}
+              containerStyle={{width: '87%', alignSelf: 'center'}}
             />
           </KeyboardAvoidingView>
         )}
       </Formik>
       <View style={{flex: 0.2, justifyContent: 'center'}}>
-        <Text style={{color: '#4ab6be', fontSize: 20, alignSelf: 'center'}}>
-          Already registered?
+        <Text style={{color: '#4AB6BE', fontSize: 20, alignSelf: 'center'}}>
+          Don't have an account yet?
         </Text>
         <Button
-          title="Do the Log In by touching here"
+          title="Touch here to Sign in "
           type="clear"
-          onPress={() => navigation.navigate('Log In')}
-          titleStyle={styles.loginButtonTitleStyle}
+          onPress={() => navigation.navigate('Sign Up')}
+          titleStyle={styles.signinButtonTitleStyle}
           containerStyle={{borderBottomColor: '#fff', borderBottomWidth: 1}}
         />
       </View>
@@ -151,14 +128,14 @@ const AuthScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'rgba(39, 43, 107, 0.7)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerText: {
     color: '#fff',
     fontSize: 38,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'Montserrat',
     flex: 0.1,
     paddingTop: 60,
   },
@@ -169,21 +146,21 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
   },
-  buttonStyle: {
-    borderRadius: 10,
-    backgroundColor: '#4ab6be',
-  },
   buttonTitleStyle: {
     color: '#fff',
-    fontSize: 20,
-    fontFamily: 'Nunito-Regular',
     width: '100%',
+    fontSize: 22,
+    fontFamily: 'Montserrat',
   },
-  loginButtonTitleStyle: {
+  buttonStyle: {
+    backgroundColor: '#4AB6BE',
+    borderRadius: 10,
+  },
+  signinButtonTitleStyle: {
     color: '#fff',
     fontSize: 18,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'Montserrat',
   },
 });
 
-export default AuthScreen;
+export default LoginScreen;
